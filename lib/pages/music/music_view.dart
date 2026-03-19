@@ -8,8 +8,9 @@ import 'package:musicapp/cubit/music_cubit.dart';
 import 'package:musicapp/model/musicapp.dart';
 import 'package:musicapp/pages/home/home_views.dart';
 import 'package:musicapp/pages/music/widget/container_controller.dart';
+import 'package:in_app_review/in_app_review.dart';
 import 'package:musicapp/pages/music/widget/list_data.dart';
- 
+
 class MusicView extends StatefulWidget {
   const MusicView({super.key});
 
@@ -30,7 +31,18 @@ class _MusicViewState extends State<MusicView> with WidgetsBindingObserver {
     try {
       ads.loadInterstitialAd();
     } catch (e) {}
+
     super.initState();
+  }
+
+  Future<void> requestAppReview() async {
+    final InAppReview inAppReview = InAppReview.instance;
+
+    // 1. تأكد إن الموبايل بيدعم الميزة دي (أندرويد أو iOS)
+    if (await inAppReview.isAvailable()) {
+      // 2. اظهر الـ Pop-up بتاعة النجوم والتقييم
+      await inAppReview.requestReview();
+    }
   }
 
   @override
@@ -51,7 +63,11 @@ class _MusicViewState extends State<MusicView> with WidgetsBindingObserver {
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () {
-        ads.showAdAndNavigate(context, HomeViews());
+        try {
+          ads.showAdAndNavigate(context, HomeViews());
+        } catch (e) {
+          requestAppReview();
+        }
 
         return Future.value(false);
       },
@@ -59,7 +75,11 @@ class _MusicViewState extends State<MusicView> with WidgetsBindingObserver {
         resizeToAvoidBottomInset: false,
         backgroundColor: Colors.black,
         appBar: appBarHome(context, () {
+          try {
           ads.showAdAndNavigate(context, HomeViews());
+        } catch (e) {
+          requestAppReview();
+        }
         }),
         // الحل هنا: استخدمنا Column بدل Stack عشان نفصل القائمة عن أزرار التحكم
         body: Column(

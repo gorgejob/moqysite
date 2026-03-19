@@ -5,6 +5,7 @@ import 'package:musicapp/core/widget/colors.dart';
 import 'package:musicapp/core/widget/font_size.dart';
 import 'package:musicapp/pages/home/home_views.dart';
 import 'package:musicapp/pages/splash/widget/image_splach.dart';
+import 'package:in_app_update/in_app_update.dart';
 import 'package:musicapp/pages/splash/widget/title_splach.dart';
 
 class SplachView extends StatefulWidget {
@@ -17,12 +18,26 @@ class SplachView extends StatefulWidget {
 class _SplachViewState extends State<SplachView> {
   BannerAd? _bannerAd;
 
+  Future<void> _checkForUpdate() async {
+    try {
+      // بيكلم Google Play API
+      AppUpdateInfo updateInfo = await InAppUpdate.checkForUpdate();
+
+      if (updateInfo.updateAvailability == UpdateAvailability.updateAvailable) {
+        // لو لقى تحديث، بيفتح شاشة جوجل بلاي الرسمية "جوه" تطبيقك
+        await InAppUpdate.performImmediateUpdate();
+      }
+    } catch (e) {
+      debugPrint("Error: $e");
+    }
+  }
+
   /// Loads a banner ad.
-  
 
   @override
   void initState() {
     // تفعيل مراقب الحالة
+    _checkForUpdate();
     Future.delayed(const Duration(seconds: 3), () {
       Navigator.pushReplacement(
         // ignore: use_build_context_synchronously
@@ -35,6 +50,7 @@ class _SplachViewState extends State<SplachView> {
     });
     super.initState();
   }
+
   @override
   void dispose() {
     _bannerAd?.dispose();
