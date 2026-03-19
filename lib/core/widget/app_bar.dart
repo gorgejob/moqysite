@@ -6,7 +6,7 @@ import 'package:musicapp/cubit/music_cubit.dart';
 import 'package:musicapp/pages/home/home_views.dart';
 import 'package:musicapp/pages/splash/widget/title_splach.dart';
 
-AppBar appBarHome(BuildContext context ,) {
+AppBar appBarHome(BuildContext context ,void Function()? onTap) {
   return AppBar(
     shape: const Border(bottom: BorderSide(color: Colors.white)),
     toolbarHeight: 90,
@@ -39,12 +39,7 @@ AppBar appBarHome(BuildContext context ,) {
     ),
     actions: [
       GestureDetector(
-        onTap: () {
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(builder: (context) => const HomeViews()),
-          );
-        },
+        onTap: onTap,
         child: Padding(
           padding: const EdgeInsets.only(left: 15.0),
           child: Container(
@@ -71,8 +66,8 @@ AppBar appBarsystem(BuildContext context ,) {
     title: const Logo(),
     actions: [
       GestureDetector(
-        onTap: () {
-          Navigator.pushReplacement(
+        onTap: () async{
+          await Navigator.pushReplacement(
             context,
             MaterialPageRoute(builder: (context) => const HomeViews()),
           );

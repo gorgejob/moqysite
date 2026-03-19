@@ -2,13 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:just_audio_background/just_audio_background.dart';
 import 'package:musicapp/cubit/music_cubit.dart';
 import 'package:musicapp/model/musicapp.dart';
 import 'package:musicapp/pages/splash/splach_view.dart';
-
-Future<void> main() async {
+import 'package:musicapp/pages/splash/test_ads.dart';
+ Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await MobileAds.instance.initialize(); // تهيئة الإعلانات عند تشغيل التطبيق
   await Hive.initFlutter();
   // تسجيل الـ Adapter
   Hive.registerAdapter(MusicappAdapter());
@@ -45,6 +48,7 @@ class MyApp extends StatelessWidget {
       ],
 
       home: const SplachView(),
+      // home: const TestAds(),
     );
   }
 }

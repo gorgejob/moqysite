@@ -7,7 +7,6 @@
         android:label="مهرجانات 2026"
         android:name="${applicationName}"
         android:icon="@mipmap/launcher_icon">
-
         <activity
             android:name="com.ryanheise.audioservice.AudioServiceActivity"
             android:exported="true"
@@ -29,14 +28,14 @@
             </intent-filter>
         </activity>
         <service android:name="com.ryanheise.audioservice.AudioService"
-        android:foregroundServiceType="mediaPlayback"
-        android:exported="true">
-        <intent-filter>
-            <action android:name="android.intent.action.MEDIA_BUTTON" />
-            <action android:name="android.media.browse.MediaBrowserService" />
+            android:foregroundServiceType="mediaPlayback"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MEDIA_BUTTON" />
+                <action android:name="android.media.browse.MediaBrowserService" />
             </intent-filter>
         </service>
-        
+
         <receiver android:name="com.ryanheise.audioservice.MediaButtonReceiver"
             android:exported="true">
             <intent-filter>
@@ -47,6 +46,9 @@
         <meta-data
             android:name="flutterEmbedding"
             android:value="2" />
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-8786995035200616~1979223935" />
     </application>
 
     <queries>

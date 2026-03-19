@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:musicapp/core/widget/colors.dart';
 import 'package:musicapp/core/widget/font_size.dart';
 import 'package:musicapp/pages/home/home_views.dart';
@@ -14,6 +15,11 @@ class SplachView extends StatefulWidget {
 }
 
 class _SplachViewState extends State<SplachView> {
+  BannerAd? _bannerAd;
+
+  /// Loads a banner ad.
+  
+
   @override
   void initState() {
     // تفعيل مراقب الحالة
@@ -28,6 +34,11 @@ class _SplachViewState extends State<SplachView> {
       );
     });
     super.initState();
+  }
+  @override
+  void dispose() {
+    _bannerAd?.dispose();
+    super.dispose();
   }
 
   @override

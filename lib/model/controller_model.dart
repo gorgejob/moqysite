@@ -29,7 +29,6 @@ class ControllerModel {
             builder: (context) => const MusicView(),
           ),
         );
-
       },
     ),
     ControllerModel(
@@ -52,7 +51,7 @@ class ControllerModel {
       color: Colors.white,
       ontap: (context) {
         final Uri url = Uri.parse(
-          "https://play.google.com/store/apps/dev?id=6206543452590598359",
+          "https://play.google.com/store/apps/dev?id=6694959770488864457",
         );
 
         // ignore: no_leading_underscores_for_local_identifiers
@@ -72,8 +71,8 @@ class ControllerModel {
       ontap: (context) {
         // ignore: deprecated_member_use
         Share.share(
-          "https://play.google.com/store/apps/details?id=com.example.projucts_helper&pcampaignid=web_share",
-          subject: "gorge",
+          "https://play.google.com/store/apps/details?id=com.moqysite.musicapp&pcampaignid=web_share",
+          subject: "مشاركة التطبيق",
         );
       },
     ),
